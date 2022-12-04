@@ -1,5 +1,15 @@
 use std::fs;
 
+type Input = Vec<u32>;
+
+fn max_item(input: &Input) -> &u32 {
+    input.iter().max().unwrap()
+}
+
+fn sum_of_top_three(input: &Input) -> u32 {
+    input.iter().take(3).sum()
+}
+
 fn main() {
     let input = fs::read_to_string("./src/input.txt").unwrap();
     let lines = input.split("\n\n");
@@ -14,8 +24,6 @@ fn main() {
 
     data.sort_by(|a, b| b.cmp(a));
 
-    let top_three_sum: u32 = data.iter().take(3).sum();
-
-    println!("Part 1: {:?}", data[0]);
-    println!("Part 2: {:?}", top_three_sum);
+    println!("Part 1: {:?}", max_item(&data));
+    println!("Part 2: {:?}", sum_of_top_three(&data));
 }
