@@ -10,7 +10,10 @@ fn main() {
 
     let alphabet = ('a'..='z').into_iter().collect::<Vec<char>>();
 
-    for item in data {
+    println!("{:?}", data);
+
+    // Part One
+    for item in &data {
         let chars = item.len();
         let half = chars / 2;
         let s = item.split_at(half);
@@ -26,6 +29,11 @@ fn main() {
             + add_to;
 
         sum += priority;
+    }
+
+    // Part Two
+    for chunk in data.chunks(3) {
+        let t: Vec<_> = chunk.iter().map(|r| println!("{}", r));
     }
 
     println!("{:?}", sum);
