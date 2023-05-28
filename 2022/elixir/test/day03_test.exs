@@ -14,7 +14,7 @@ defmodule Day03Test do
     assert Day03.Part1.solve(@example_input) == 157
   end
 
-  # test "part two should equal 12" do
-  #   assert Day02.Part2.solve(@example_input) == 12
-  # end
+  test "part two should equal 70" do
+    assert Day03.Part2.solve(@example_input) == 70
+  end
 end
