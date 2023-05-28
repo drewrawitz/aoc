@@ -26,9 +26,9 @@ defmodule Day03.Part1 do
       |> Tuple.to_list()
       |> Enum.map(&String.codepoints/1)
 
-    [common | _] = MapSet.intersection(MapSet.new(first), MapSet.new(second)) |> MapSet.to_list()
+    letter = MapSet.intersection(MapSet.new(first), MapSet.new(second)) |> MapSet.to_list() |> hd
 
-    find_score(common)
+    find_score(letter)
   end
 end
 
@@ -42,18 +42,14 @@ defmodule Day03.Part2 do
   end
 
   def calculate_priority(lines) do
-    [one, two, three] = lines
+    [one, two, three] =
+      Enum.map(lines, fn line ->
+        String.codepoints(line)
+        |> MapSet.new()
+      end)
 
-    one = String.codepoints(one)
-    two = String.codepoints(two)
-    three = String.codepoints(three)
-
-    set1 = MapSet.new(one)
-    set2 = MapSet.new(two)
-    set3 = MapSet.new(three)
-
-    common_one = MapSet.intersection(set1, set2)
-    [letter | _] = MapSet.intersection(common_one, set3) |> MapSet.to_list()
+    common_one = MapSet.intersection(one, two)
+    letter = MapSet.intersection(common_one, three) |> MapSet.to_list() |> hd
 
     Day03.Part1.find_score(letter)
   end
