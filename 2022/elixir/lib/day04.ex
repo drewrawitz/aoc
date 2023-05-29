@@ -3,8 +3,8 @@ defmodule Day04.Part1 do
     input
     |> String.split("\n", trim: true)
     |> Enum.map(&find_overlap/1)
+    |> Enum.map(&calculate_total/1)
     |> Enum.flat_map(fn x -> x end)
-    |> Enum.filter(fn x -> !is_nil(x) end)
     |> Enum.sum()
   end
 
@@ -22,13 +22,17 @@ defmodule Day04.Part1 do
     end)
     |> Enum.map(&MapSet.new/1)
     |> Enum.chunk_every(2)
+  end
+
+  def calculate_total(line) do
+    line
     |> Enum.map(fn [first, second] ->
       common = MapSet.intersection(first, second) |> MapSet.to_list()
 
       cond do
         length(common) == MapSet.size(first) -> 1
         length(common) == MapSet.size(second) -> 1
-        true -> nil
+        true -> 0
       end
     end)
   end
@@ -36,7 +40,24 @@ end
 
 defmodule Day04.Part2 do
   def solve(input) do
-    "N/A"
+    input
+    |> String.split("\n", trim: true)
+    |> Enum.map(&Day04.Part1.find_overlap/1)
+    |> Enum.map(&calculate_total/1)
+    |> Enum.flat_map(fn x -> x end)
+    |> Enum.sum()
+  end
+
+  def calculate_total(line) do
+    line
+    |> Enum.map(fn [first, second] ->
+      common = MapSet.intersection(first, second) |> MapSet.to_list()
+
+      cond do
+        length(common) > 0 -> 1
+        true -> 0
+      end
+    end)
   end
 end
 

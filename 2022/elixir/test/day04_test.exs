@@ -14,7 +14,7 @@ defmodule Day04Test do
     assert Day04.Part1.solve(@example_input) == 2
   end
 
-  test "part two should equal N/A" do
-    assert Day04.Part2.solve(@example_input) == "N/A"
+  test "part two should equal 4" do
+    assert Day04.Part2.solve(@example_input) == 4
   end
 end
